@@ -1,11 +1,13 @@
-import styled from 'styled-components';
-
-const Title = styled.h1`
-  color: #e63946;
-  text-align: center;
-  margin-top: 100px;
-`;
+// src/pages/index.tsx
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 export default function Home() {
-  return <Title>Bienvenue sur RED Product</Title>;
+  const router = useRouter();
+
+  useEffect(() => {
+    router.replace('/auth/login');
+  }, [router]);
+
+  return null;
 }
