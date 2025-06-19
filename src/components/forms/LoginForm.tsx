@@ -55,7 +55,7 @@ export default function LoginForm() {
 
   const handleFakeLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    router.push('/hotels/new');
+    router.push('/dashboard');
   };
 
   return (
