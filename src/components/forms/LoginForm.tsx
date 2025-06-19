@@ -2,6 +2,7 @@
 
 import styled from 'styled-components';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Input, Label, Checkbox, SignInButton } from './_FormElements';
 
 const FormBox = styled.div`
@@ -50,15 +51,22 @@ const LinkStyled = styled.a`
 `;
 
 export default function LoginForm() {
+  const router = useRouter();
+
+  const handleFakeLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    router.push('/hotels/new');
+  };
+
   return (
     <FormBox>
       <Title>Connectez-vous en tant qu’Admin</Title>
-      <form>
+      <form onSubmit={handleFakeLogin}>
         <Label htmlFor="email">E-mail</Label>
-        <Input id="email" type="email" required />
+        <Input id="email" type="email" />
 
         <Label htmlFor="password">Mot de passe</Label>
-        <Input id="password" type="password" required />
+        <Input id="password" type="password" />
 
         <CheckboxContainer>
           <Checkbox type="checkbox" id="remember" />
