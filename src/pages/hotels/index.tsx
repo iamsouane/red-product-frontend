@@ -1,7 +1,9 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
+
 import Sidebar from '@/components/layout/Sidebar';
 import AppHeader from '@/components/layout/AppHeader';
 import MainContainer from '@/components/layout/MainContainer';
@@ -29,6 +31,8 @@ interface Hotel {
 }
 
 export default function HotelsPage() {
+  const router = useRouter();
+
   const [hotels, setHotels] = useState<Hotel[]>([
     {
       imageSrc: '/img/terou-bi.jpg',
@@ -81,14 +85,7 @@ export default function HotelsPage() {
   ]);
 
   const handleCreateHotel = () => {
-    // Simule un ajout d'hôtel
-    const newHotel: Hotel = {
-      imageSrc: '/img/new-hotel.jpg',
-      address: 'Nouvelle adresse à Dakar',
-      name: 'Nouveau Hôtel',
-      price: '28.000 XOF',
-    };
-    setHotels([...hotels, newHotel]);
+    router.push('/hotels/new');
   };
 
   return (

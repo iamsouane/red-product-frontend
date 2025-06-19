@@ -33,19 +33,6 @@ const CreateButton = styled.button`
   font-weight: 600;
   border-radius: 6px;
   cursor: pointer;
-
-  /* Enlève les styles de focus */
-  outline: none;
-
-  &:focus {
-    outline: none;
-    box-shadow: none;
-  }
-
-  &:hover {
-    background: #000;
-    color: #fff;
-  }
 `;
 
 interface MainContainerProps {
