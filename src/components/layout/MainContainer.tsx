@@ -7,33 +7,68 @@ const MainContent = styled.div`
   padding: 20px 30px;
   background: #fff;
   display: flex;
-  flex-direction: column;   
-  align-items: flex-start;
+  flex-direction: column;
   margin-top: 10px;
 `;
 
-const WelcomeTitle = styled.h2`
+const HeaderRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+`;
+
+const Title = styled.h2`
   font-size: 24px;
   font-weight: 700;
-  margin-bottom: 10px;
   color: #000;
 `;
 
-export const WelcomeText = styled.p`
-  font-size: 16px;
-  color: #444;
-  margin: 0;
+const CreateButton = styled.button`
+  padding: 10px 20px;
+  background: transparent;
+  border: 2px solid #000;
+  color: #000;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+
+  /* Enlève les styles de focus */
+  outline: none;
+
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  &:hover {
+    background: #000;
+    color: #fff;
+  }
 `;
 
 interface MainContainerProps {
   title: string;
+  count?: number;
+  onCreate?: () => void;
   children?: React.ReactNode;
 }
 
-export default function MainContainer({ title, children }: MainContainerProps) {
+export default function MainContainer({
+  title,
+  count,
+  onCreate,
+  children
+}: MainContainerProps) {
   return (
     <MainContent>
-      <WelcomeTitle>{title}</WelcomeTitle>
+      <HeaderRow>
+        <Title>
+          {title} {count !== undefined && <span> {count}</span>}
+        </Title>
+        {onCreate && <CreateButton onClick={onCreate}>+ Créer un nouveau hôtel</CreateButton>}
+      </HeaderRow>
       {children}
     </MainContent>
   );

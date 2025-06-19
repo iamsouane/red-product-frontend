@@ -44,7 +44,7 @@ export default function DashboardPage() {
     <DashboardContainer>
       <Sidebar />
       <MainLayout>
-        <AppHeader />
+        <AppHeader title="Dashboard" />
 
         <MainContainer title="Bienvenue sur RED PRODUCT">
           <Paragraph>

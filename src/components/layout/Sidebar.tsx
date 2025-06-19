@@ -3,6 +3,7 @@
 import styled from 'styled-components';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const SidebarContainer = styled.div`
   width: 260px;
@@ -51,16 +52,22 @@ const NavTitle = styled.p`
   margin-bottom: 10px;
 `;
 
-const NavItem = styled(Link)`
+// NavItem avec style conditionnel selon prop $active
+const NavItem = styled(Link)<{ $active?: boolean }>`
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #fff;
-  text-decoration: none;
+  color: ${(props) => (props.$active ? '#121212' : '#fff')};
+  background: ${(props) => (props.$active ? '#fff' : 'transparent')};
+  padding: 10px 14px;
+  border-radius: 8px;
   font-size: 16px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease;
 
   &:hover {
-    opacity: 0.8;
+    opacity: 0.9;
   }
 `;
 
@@ -109,6 +116,8 @@ const OnlineDot = styled.div`
 `;
 
 export default function Sidebar() {
+  const pathname = usePathname();
+
   return (
     <SidebarContainer>
       <div>
@@ -125,21 +134,45 @@ export default function Sidebar() {
 
         <Nav>
           <NavTitle>Principal</NavTitle>
-          <NavItem href="/dashboard">
-            <span>
-                <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-  <path d="M5 3a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H5Zm14 18a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h4ZM5 11a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2H5Zm14 2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h4Z"/>
-</svg>
-    
-            </span> Dashboard
-          </NavItem>
-          <NavItem href="/hotels">
-            <span>
-                <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 14H4m6.5 3L8 20m5.5-3 2.5 3M4.88889 17H19.1111c.4909 0 .8889-.4157.8889-.9286V4.92857C20 4.41574 19.602 4 19.1111 4H4.88889C4.39797 4 4 4.41574 4 4.92857V16.0714c0 .5129.39797.9286.88889.9286ZM13 14v-3h4v3h-4Z"/>
-</svg>
 
-            </span> Liste des hôtels
+          <NavItem href="/dashboard" $active={pathname === '/dashboard'}>
+            <span>
+              <svg
+                className="w-6 h-6"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M5 3a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H5Zm14 18a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h4ZM5 11a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2H5Zm14 2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h4Z" />
+              </svg>
+            </span>
+            Dashboard
+          </NavItem>
+
+          <NavItem href="/hotels" $active={pathname === '/hotels'}>
+            <span>
+              <svg
+                className="w-6 h-6"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M20 14H4m6.5 3L8 20m5.5-3 2.5 3M4.88889 17H19.1111c.4909 0 .8889-.4157.8889-.9286V4.92857C20 4.41574 19.602 4 19.1111 4H4.88889C4.39797 4 4 4.41574 4 4.92857V16.0714c0 .5129.39797.9286.88889.9286ZM13 14v-3h4v3h-4Z"
+                />
+              </svg>
+            </span>
+            Liste des hôtels
           </NavItem>
         </Nav>
       </div>
@@ -149,7 +182,7 @@ export default function Sidebar() {
         <ProfileInfo>
           <Avatar src="/img/iamsouane.jpeg" alt="PhotoDeProfil" width={40} height={40} />
           <Info>
-            <Name>Ismaïla Souane</Name>
+            <Name>Ismaïla SOUANE</Name>
             <Status>
               <OnlineDot />
               En ligne
