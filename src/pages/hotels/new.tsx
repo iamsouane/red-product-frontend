@@ -2,7 +2,7 @@
 
 import styled from 'styled-components';
 import TextInput from '@/components/forms/TextInput';
-import PhotoUpload from '@/components/forms/PhotoUpload';
+import PhotoUpload from '@/components/views/PhotoUpload';
 import SelectInput from '@/components/forms/SelectInput';
 import { useState } from 'react';
 
@@ -27,7 +27,7 @@ const WhiteBox = styled.div`
 const Header = styled.h1`
   font-size: 22px;
   font-weight: 700;
-  margin-bottom: 24px;  /* espace augmenté */
+  margin-bottom: 24px;
   cursor: pointer;
   color: #000;
 `;
@@ -35,7 +35,7 @@ const Header = styled.h1`
 const DashedLine = styled.hr`
   border: none;
   border-top: 2px dashed #000;
-  margin: 0 0 40px 0; /* espace après la ligne */
+  margin: 0 0 40px 0;
   width: 100%;
 `;
 
@@ -82,13 +82,46 @@ const currencyOptions = [
 export default function NewHotelPage() {
   const [photo, setPhoto] = useState<File | null>(null);
 
+  // Pour que la preview ne change pas à chaque rendu, on crée un URL une fois
+  const previewUrl = photo ? URL.createObjectURL(photo) : null;
+
   const handlePhotoChange = (file: File | null) => {
     setPhoto(file);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Hôtel enregistré !');
+
+    const form = e.currentTarget as HTMLFormElement;
+
+    const formData = new FormData();
+    formData.append('name', (form.elements.namedItem("hotelName") as HTMLInputElement).value);
+    formData.append('address', (form.elements.namedItem("address") as HTMLInputElement).value);
+    formData.append('email', (form.elements.namedItem("email") as HTMLInputElement).value);
+    formData.append('phone', (form.elements.namedItem("phone") as HTMLInputElement).value);
+    formData.append('price', (form.elements.namedItem("price") as HTMLInputElement).value);
+    formData.append('currency', (form.elements.namedItem("currency") as HTMLSelectElement).value);
+
+    if (photo) {
+      formData.append('photo', photo);
+    }
+
+    try {
+      const res = await fetch('http://localhost:5000/api/hotels', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (res.ok) {
+        alert("Hôtel enregistré !");
+        window.location.href = '/hotels';
+      } else {
+        alert("Erreur lors de l’enregistrement");
+      }
+    } catch (error) {
+      console.error('Erreur:', error);
+      alert("Erreur réseau");
+    }
   };
 
   return (
@@ -136,7 +169,7 @@ export default function NewHotelPage() {
 
           <PhotoLabel>Ajouter une photo</PhotoLabel>
 
-          <PhotoUpload onChange={handlePhotoChange} />
+          <PhotoUpload onChange={handlePhotoChange} previewUrl={previewUrl} />
 
           <SubmitButton type="submit">Enregistrer</SubmitButton>
         </form>

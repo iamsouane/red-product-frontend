@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 
@@ -24,7 +24,8 @@ const MainLayout = styled.div`
 `;
 
 interface Hotel {
-  imageSrc: string;
+  _id: string;
+  imageUrl: string;  // ici, l'URL reçue du backend
   address: string;
   name: string;
   price: string;
@@ -32,57 +33,24 @@ interface Hotel {
 
 export default function HotelsPage() {
   const router = useRouter();
+  const [hotels, setHotels] = useState<Hotel[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const [hotels, setHotels] = useState<Hotel[]>([
-    {
-      imageSrc: '/img/terou-bi.jpg',
-      address: 'Boulevard Martin Luther King Dakar, 11500',
-      name: 'Hôtel Terrou-Bi',
-      price: '25.000 XOF',
-    },
-    {
-      imageSrc: '/img/king-fahd.png',
-      address: 'Rte des Almadies, Dakar',
-      name: 'King Fahd Palace',
-      price: '20.000 XOF',
-    },
-    {
-      imageSrc: '/img/radisson.jpg',
-      address: 'Rte de la Corniche O, Dakar 16868',
-      name: 'Radisson Blu Hotel',
-      price: '22.000 XOF',
-    },
-    {
-      imageSrc: '/img/pullman.jpg',
-      address: 'Place de l\'Independance, 10 Rue PL 29, Dakar',
-      name: 'Pullman Dakar Teranga',
-      price: '30.000 XOF',
-    },
-    {
-      imageSrc: '/img/lac-rose.jpg',
-      address: 'Lac Rose, Dakar',
-      name: 'Hôtel Lac Rose',
-      price: '25.000 XOF',
-    },
-    {
-      imageSrc: '/img/saly.jpg',
-      address: 'Mbour, Sénégal',
-      name: 'Hôtel Saly',
-      price: '20.000 XOF',
-    },
-    {
-      imageSrc: '/img/palm.jpg',
-      address: 'BP64, Saly 23000',
-      name: 'Palm Beach Resort & Spa',
-      price: '22.000 XOF',
-    },
-    {
-      imageSrc: '/img/pullman-2.jpg',
-      address: 'Place de l\'Independance, 10 Rue PL 29, Dakar',
-      name: 'Pullman Dakar Teranga',
-      price: '30.000 XOF',
-    },
-  ]);
+  const fetchHotels = async () => {
+    try {
+      const res = await fetch('http://localhost:5000/api/hotels');
+      const data = await res.json();
+      setHotels(data);
+    } catch (error) {
+      console.error('Erreur de chargement des hôtels', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchHotels();
+  }, []);
 
   const handleCreateHotel = () => {
     router.push('/hotels/new');
@@ -95,15 +63,19 @@ export default function HotelsPage() {
         <AppHeader title="Liste des hôtels" />
         <MainContainer title="Hôtels" count={hotels.length} onCreate={handleCreateHotel} />
         <StatsGrid>
-          {hotels.map((hotel, index) => (
-            <HotelCard
-              key={index}
-              imageSrc={hotel.imageSrc}
-              address={hotel.address}
-              name={hotel.name}
-              price={hotel.price}
-            />
-          ))}
+          {loading ? (
+            <p>Chargement...</p>
+          ) : (
+            hotels.map((hotel) => (
+              <HotelCard
+                key={hotel._id}
+                imageSrc={`http://localhost:5000${hotel.imageUrl}`}
+                address={hotel.address}
+                name={hotel.name}
+                price={hotel.price}
+              />
+            ))
+          )}
         </StatsGrid>
       </MainLayout>
     </PageContainer>
