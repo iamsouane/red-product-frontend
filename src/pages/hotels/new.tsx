@@ -148,6 +148,7 @@ export default function NewHotelPage() {
     } catch (error) {
       console.error('Erreur:', error);
       alert("Erreur réseau");
+      console.log('API URL:', process.env.NEXT_PUBLIC_API_URL);
     }
   };
 
