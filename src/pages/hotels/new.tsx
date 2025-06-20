@@ -141,7 +141,7 @@ export default function NewHotelPage() {
 
       if (res.ok) {
         alert('Hôtel enregistré !');
-        window.location.href = '/hotels';
+        window.location.replace('/hotels');
       } else {
         alert("Erreur lors de l’enregistrement");
       }
