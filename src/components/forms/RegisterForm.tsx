@@ -30,6 +30,15 @@ const CheckboxContainer = styled.div`
 const TermsLabel = styled.label`
   font-size: 14px;
   color: rgba(0, 0, 0, 0.87);
+  user-select: none;
+`;
+
+const StyledLink = styled.a`
+  color: #FFD964;
+  margin-left: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+  text-decoration: underline;
 `;
 
 const BottomText = styled.p`
@@ -42,6 +51,7 @@ const LinkStyled = styled.a`
   color: #FFD964;
   margin-left: 5px;
   cursor: pointer;
+  text-decoration: underline;
 `;
 
 export default function RegisterForm() {
@@ -50,18 +60,25 @@ export default function RegisterForm() {
       <Title>Inscrivez-vous en tant que Admin</Title>
       <form>
         <Label htmlFor="name">Nom</Label>
-        <Input id="name" type="text" required />
+        <Input id="name" name="name" type="text" required />
 
         <Label htmlFor="email">E-mail</Label>
-        <Input id="email" type="email" required />
+        <Input id="email" name="email" type="email" required />
 
         <Label htmlFor="password">Mot de passe</Label>
-        <Input id="password" type="password" required />
+        <Input id="password" name="password" type="password" required />
 
         <CheckboxContainer>
-          <Checkbox id="terms" />
+          <Checkbox id="terms" name="terms" required />
           <TermsLabel htmlFor="terms">
-            J’accepte les <Link href="/terms" passHref legacyBehavior>termes</Link> et la <Link href="/privacy" passHref legacyBehavior>politique</Link>
+            J’accepte les
+            <Link href="/terms" passHref legacyBehavior>
+              <StyledLink> termes </StyledLink>
+            </Link>
+            et la
+            <Link href="/privacy" passHref legacyBehavior>
+              <StyledLink> politique </StyledLink>
+            </Link>
           </TermsLabel>
         </CheckboxContainer>
 

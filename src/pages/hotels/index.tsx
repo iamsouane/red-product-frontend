@@ -10,22 +10,24 @@ import MainContainer from '@/components/layout/MainContainer';
 import StatsGrid from '@/components/views/StatsGrid';
 import HotelCard from '@/components/views/HotelCard';
 
+
+
 const PageContainer = styled.div`
-  display: flex;
-  height: 100vh;
-  background: #f0f0f0;
-`;
+display: flex;
+  background: #f0f0f0;`;
 
 const MainLayout = styled.div`
-  flex: 1;
+  margin-left: 290px; /* Décalé à droite du sidebar */
+  width: calc(100% - 290px);
   display: flex;
   flex-direction: column;
-  background: #fff;
+  background: #f0f0f0;
+  min-height: 100vh;
 `;
 
 interface Hotel {
   _id: string;
-  imageUrl: string;  // ici, l'URL reçue du backend
+  imageUrl: string;
   address: string;
   name: string;
   price: string;
@@ -58,11 +60,11 @@ export default function HotelsPage() {
 
   return (
     <PageContainer>
-      <Sidebar />
+      <Sidebar /> {/* Rendu fixe */}
       <MainLayout>
         <AppHeader title="Liste des hôtels" />
         <MainContainer title="Hôtels" count={hotels.length} onCreate={handleCreateHotel} />
-        <StatsGrid>
+        <StatsGrid columns={4}>
           {loading ? (
             <p>Chargement...</p>
           ) : (

@@ -1,30 +1,32 @@
-import styled from 'styled-components';
+'use client';
 
-const BrandWrapper = styled.div`
+import styled from 'styled-components';
+import Link from 'next/link';
+
+const BrandWrapper = styled(Link)`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 26.66px;
+  color: #ffffffde;
+  text-decoration: none;
+`;
+
+const LogoSVG = styled.div`
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
-const LogoSVG = styled.div`
-  width: 32px;
-  height: 32px;
-  margin-right: 10px;
-`;
-
-const BrandText = styled.h1`
-  font-family: 'Roboto', sans-serif;
-  font-weight: 700;
-  font-size: 26.66px;
-  line-height: 21px;
-  color: #fff;
-`;
-
 export default function BrandHeader() {
   return (
-    <BrandWrapper>
+    <BrandWrapper href="/">
       <LogoSVG>
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+        <svg width="30" height="30" viewBox="0 0 32 32" fill="none">
           <path d="M2.66602 2.66624H29.3286V29.3288L2.66602 2.66624Z" fill="white" />
           <path
             d="M2.66602 2.66624H22.663L15.9973 15.9975L2.66602 2.66624Z"
@@ -34,7 +36,7 @@ export default function BrandHeader() {
           <path d="M2.66602 2.66624H15.9973L2.66602 29.3288V2.66624Z" fill="white" />
         </svg>
       </LogoSVG>
-      <BrandText>RED PRODUCT</BrandText>
+      RED PRODUCT
     </BrandWrapper>
   );
 }

@@ -2,6 +2,8 @@
 
 import styled from 'styled-components';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { Input, Label, SignInButton } from './_FormElements';
 
 const FormBox = styled.div`
   background: #fff;
@@ -14,9 +16,11 @@ const FormBox = styled.div`
 
 const Title = styled.h2`
   font-family: 'Roboto', sans-serif;
-  font-size: 17px;
+  font-weight: 400;
+  font-size: 17.07px;
+  line-height: 25.6px;
   color: rgba(0, 0, 0, 0.87);
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 `;
 
 const Paragraph = styled.p`
@@ -25,79 +29,51 @@ const Paragraph = styled.p`
   color: rgba(0, 0, 0, 0.7);
   margin-bottom: 30px;
   line-height: 1.4;
+  user-select: none;
 `;
 
-const Label = styled.label`
-  font-size: 18px;
-  opacity: 0.5;
-  margin-top: 10px;
-  display: block;
-  color: rgba(0, 0, 0, 0.87);
-`;
-
-const Input = styled.input`
-  width: 100%;
-  border: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-  padding: 10px 0;
-  margin-bottom: 20px;
-  background: transparent;
-  color: rgba(0, 0, 0, 0.87);
-`;
-
-const SubmitButton = styled.button`
-  background: #45484b;
-  color: #fff;
-  width: 100%;
-  padding: 15px;
-  font-size: 21px;
-  font-weight: 500;
-  border: none;
-  border-radius: 5px;
-  margin-top: 10px;
-  cursor: pointer;
-`;
-
-const BackLinkWrapper = styled.div`
-  margin-top: 20px;
+const BottomText = styled.p`
   text-align: center;
+  margin-top: 20px;
+  color: rgba(0, 0, 0, 0.87);
 `;
 
-const LinkBack = styled.a`
-  font-size: 16px;
-  font-weight: 500;
-  color: #ffffff;
+const LinkStyled = styled.a`
+  color: #FFD964;
+  margin-left: 5px;
   cursor: pointer;
-
-  span {
-    color: #ffd964;
-    font-weight: 600;
-  }
 `;
 
 export default function ForgotPasswordForm() {
-  return (
-    <>
-      <FormBox>
-        <Title>Mot de passe oublié ?</Title>
-        <Paragraph>
-          Entrez votre adresse e-mail ci-dessous et nous vous enverrons des instructions sur la
-          façon de modifier votre mot de passe.
-        </Paragraph>
-        <form>
-          <Label htmlFor="email">Votre e-mail</Label>
-          <Input id="email" type="email" required />
-          <SubmitButton type="submit">Envoyer</SubmitButton>
-        </form>
-      </FormBox>
+  const router = useRouter();
 
-      <BackLinkWrapper>
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Ici tu peux appeler ton API pour le reset mot de passe
+    alert("Instructions envoyées à votre email.");
+    router.push('/auth/login');
+  };
+
+  return (
+    <FormBox>
+      <Title>Mot de passe oublié ?</Title>
+      <Paragraph>
+        Entrez votre adresse e-mail ci-dessous et nous vous enverrons des instructions sur la façon de modifier votre mot de passe.
+      </Paragraph>
+
+      <form onSubmit={handleSubmit}>
+        <Label htmlFor="email">Votre e-mail</Label>
+        <Input id="email" type="email" required />
+
+        <SignInButton type="submit">Envoyer</SignInButton>
+      </form>
+
+      <BottomText>
+        Vous vous souvenez de votre mot de passe ?
         <Link href="/auth/login" passHref legacyBehavior>
-          <LinkBack>
-            Revenir à la <span>connexion</span>
-          </LinkBack>
+          <LinkStyled>Se connecter</LinkStyled>
         </Link>
-      </BackLinkWrapper>
-    </>
+      </BottomText>
+    </FormBox>
   );
 }

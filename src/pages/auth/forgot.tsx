@@ -2,11 +2,11 @@
 
 import styled from 'styled-components';
 import ForgotPasswordForm from '@/components/forms/ForgotPasswordForm';
-import BrandHeader from '@/components/forms/BrandHeader';
+import BrandHeader from '@/components/views/BrandHeader';
 
 const ForgotContainer = styled.div`
   min-height: 100vh;
-  background: #121212;
+  background: #494C4F;
   display: flex;
   flex-direction: column;
   justify-content: center;

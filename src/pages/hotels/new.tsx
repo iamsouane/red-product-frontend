@@ -16,27 +16,35 @@ const PageContainer = styled.div`
 `;
 
 const WhiteBox = styled.div`
-  background: #fff;
+  background: #ffffff;
   padding: 40px;
-  border-radius: 10px;
-  max-width: 800px;
+  border-radius: 11px;
+  border: 1.32px solid #dddddd;
+  max-width: 966px;
   width: 100%;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  height: 938px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+`;
+
+const HeaderBox = styled.div`
+  width: 884px;
+  height: 121.75px;
+  border-bottom: 2.65px dashed #dddddd;
+  margin-bottom: 40px;
+  display: flex;
+  align-items: flex-start;
 `;
 
 const Header = styled.h1`
-  font-size: 22px;
+  font-family: 'Roboto', sans-serif;
   font-weight: 700;
-  margin-bottom: 24px;
+  font-size: 21.74px;
+  line-height: 34.17px;
+  text-transform: uppercase;
+  color: #555555;
   cursor: pointer;
-  color: #000;
-`;
-
-const DashedLine = styled.hr`
-  border: none;
-  border-top: 2px dashed #000;
-  margin: 0 0 40px 0;
-  width: 100%;
 `;
 
 const Row = styled.div`
@@ -53,24 +61,46 @@ const HalfInput = styled.div`
   flex: 1;
 `;
 
+const InputGroup = styled.div`
+  width: 422px;
+  height: 91px;
+  background: #ffffff;
+  border: 1.32px  #dddddd;
+  border-radius: 14px;
+  padding: 10px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
 const PhotoLabel = styled.p`
-  font-weight: 600;
-  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 18.53px;
+  line-height: 27.79px;
   margin: 30px 0 10px 0;
-  color: #000;
+  color: #555555;
 `;
 
 const SubmitButton = styled.button`
-  background: #000;
+  background: #555555;
   color: #fff;
-  padding: 15px 30px;
-  font-size: 18px;
+  padding: 18px 44px;
+  font-family: 'Roboto', sans-serif;
   font-weight: 700;
+  font-size: 18px;
+  line-height: 22.23px;
   border: none;
-  border-radius: 6px;
+  border-radius: 14px;
   cursor: pointer;
   margin-top: 30px;
   float: right;
+  letter-spacing: 0;
+  text-transform: uppercase;
+
+  &:hover {
+    background: #444444;
+  }
 `;
 
 const currencyOptions = [
@@ -81,8 +111,6 @@ const currencyOptions = [
 
 export default function NewHotelPage() {
   const [photo, setPhoto] = useState<File | null>(null);
-
-  // Pour que la preview ne change pas à chaque rendu, on crée un URL une fois
   const previewUrl = photo ? URL.createObjectURL(photo) : null;
 
   const handlePhotoChange = (file: File | null) => {
@@ -91,16 +119,15 @@ export default function NewHotelPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     const form = e.currentTarget as HTMLFormElement;
 
     const formData = new FormData();
-    formData.append('name', (form.elements.namedItem("hotelName") as HTMLInputElement).value);
-    formData.append('address', (form.elements.namedItem("address") as HTMLInputElement).value);
-    formData.append('email', (form.elements.namedItem("email") as HTMLInputElement).value);
-    formData.append('phone', (form.elements.namedItem("phone") as HTMLInputElement).value);
-    formData.append('price', (form.elements.namedItem("price") as HTMLInputElement).value);
-    formData.append('currency', (form.elements.namedItem("currency") as HTMLSelectElement).value);
+    formData.append('name', (form.elements.namedItem('hotelName') as HTMLInputElement).value);
+    formData.append('address', (form.elements.namedItem('address') as HTMLInputElement).value);
+    formData.append('email', (form.elements.namedItem('email') as HTMLInputElement).value);
+    formData.append('phone', (form.elements.namedItem('phone') as HTMLInputElement).value);
+    formData.append('price', (form.elements.namedItem('price') as HTMLInputElement).value);
+    formData.append('currency', (form.elements.namedItem('currency') as HTMLSelectElement).value);
 
     if (photo) {
       formData.append('photo', photo);
@@ -113,7 +140,7 @@ export default function NewHotelPage() {
       });
 
       if (res.ok) {
-        alert("Hôtel enregistré !");
+        alert('Hôtel enregistré !');
         window.location.href = '/hotels';
       } else {
         alert("Erreur lors de l’enregistrement");
@@ -127,48 +154,81 @@ export default function NewHotelPage() {
   return (
     <PageContainer>
       <WhiteBox>
-        <Header onClick={() => history.back()}>&larr; Créer un nouveau hôtel</Header>
-
-        <DashedLine />
+        <HeaderBox>
+          <Header onClick={() => history.back()}>&larr; Créer un nouveau hôtel</Header>
+        </HeaderBox>
 
         <form onSubmit={handleSubmit}>
           <Row>
             <HalfInput>
-              <TextInput id="hotelName" label="Nom de l'hôtel" placeholder="CAP Marniane" required />
+              <InputGroup>
+                <TextInput
+                  id="hotelName"
+                  label="Nom de l'hôtel"
+                  placeholder="CAP Marniane"
+                  required
+                />
+              </InputGroup>
             </HalfInput>
             <HalfInput>
-              <TextInput id="address" label="Adresse" placeholder="Les îles du Saloum, Mar Lodj" required />
+              <InputGroup>
+                <TextInput
+                  id="address"
+                  label="Adresse"
+                  placeholder="Les îles du Saloum, Mar Lodj"
+                  required
+                />
+              </InputGroup>
             </HalfInput>
           </Row>
 
           <Row>
             <HalfInput>
-              <TextInput id="email" label="E-mail" type="email" placeholder="information@gmail.com" required />
+              <InputGroup>
+                <TextInput
+                  id="email"
+                  label="E-mail"
+                  type="email"
+                  placeholder="information@gmail.com"
+                  required
+                />
+              </InputGroup>
             </HalfInput>
             <HalfInput>
-              <TextInput id="phone" label="Numéro de téléphone" type="tel" placeholder="+221 77 777 77 77" required />
+              <InputGroup>
+                <TextInput
+                  id="phone"
+                  label="Numéro de téléphone"
+                  type="tel"
+                  placeholder="+221 77 777 77 77"
+                  required
+                />
+              </InputGroup>
             </HalfInput>
           </Row>
 
           <Row>
             <HalfInput>
-              <TextInput
-                id="price"
-                label="Prix par nuit"
-                type="number"
-                min="0"
-                step="0.01"
-                placeholder="25.000 XOF"
-                required
-              />
+              <InputGroup>
+                <TextInput
+                  id="price"
+                  label="Prix par nuit"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  placeholder="25.000 XOF"
+                  required
+                />
+              </InputGroup>
             </HalfInput>
             <HalfInput>
-              <SelectInput id="currency" label="Devise" options={currencyOptions} required />
+              <InputGroup>
+                <SelectInput id="currency" label="Devise" options={currencyOptions} required />
+              </InputGroup>
             </HalfInput>
           </Row>
 
           <PhotoLabel>Ajouter une photo</PhotoLabel>
-
           <PhotoUpload onChange={handlePhotoChange} previewUrl={previewUrl} />
 
           <SubmitButton type="submit">Enregistrer</SubmitButton>

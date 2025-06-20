@@ -3,15 +3,15 @@
 import styled from 'styled-components';
 
 const Card = styled.div`
-  background: #fff;
-  border-radius: 10px;
-  padding: 20px;
+  width: 350px;            /* largeur fixe selon ton exemple */
+  height: 106px;           /* hauteur fixe */
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 20px 24px;
   display: flex;
   gap: 16px;
   align-items: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.06);
-  flex: 1;
-  min-width: 250px;
+  box-shadow: 0px 0px 1.33px 0px #00000026;
 `;
 
 const IconCircle = styled.div<{ color: string }>`
@@ -38,21 +38,29 @@ const TitleRow = styled.div`
 `;
 
 const Number = styled.h3`
-  font-size: 24px;
-  font-weight: 700;
-  color: #000;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;           /* font-weight 300 pour le "125" selon Figma */
+  font-size: 32px;            /* taille 32px */
+  line-height: 35.19px;
+  color: #000000DE;
   margin: 0;
 `;
 
 const Label = styled.span`
-  font-size: 16px;
-  font-weight: 600;
-  color: #555;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;           /* 300 selon Figma pour "Emails" */
+  font-size: 17.06px;
+  line-height: 18.77px;
+  color: #000000DE;
 `;
 
 const SubText = styled.p`
-  font-size: 13px;
-  color: #888;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 16.8px;
+  line-height: 25.2px;
+  color: #000000DE;
+  opacity: 0.6;
   margin-top: 6px;
 `;
 
@@ -61,9 +69,10 @@ interface StatCardProps {
   number: string;
   label: string;
   color: string;
+  subText?: string;
 }
 
-export default function StatCard({ icon, number, label, color }: StatCardProps) {
+export default function StatCard({ icon, number, label, color, subText = "Je ne sais pas quoi mettre" }: StatCardProps) {
   return (
     <Card>
       <IconCircle color={color}>{icon}</IconCircle>
@@ -72,7 +81,7 @@ export default function StatCard({ icon, number, label, color }: StatCardProps) 
           <Number>{number}</Number>
           <Label>{label}</Label>
         </TitleRow>
-        <SubText>Je ne sais pas quoi mettre</SubText>
+        {subText && <SubText>{subText}</SubText>}
       </InfoContainer>
     </Card>
   );

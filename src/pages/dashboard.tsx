@@ -18,15 +18,16 @@ import StatsGrid from '@/components/views/StatsGrid';
 
 const DashboardContainer = styled.div`
   display: flex;
-  height: 100vh;
-  background: #f0f0f0; // Fond général plus sombre
+  background: #f0f0f0;
 `;
 
 const MainLayout = styled.div`
-  flex: 1;
+  margin-left: 290px; /* Décalé à droite du sidebar */
+  width: calc(100% - 290px);
   display: flex;
   flex-direction: column;
   background: #f0f0f0;
+  min-height: 100vh;
 `;
 
 const Paragraph = styled.p`
@@ -36,7 +37,7 @@ const Paragraph = styled.p`
 `;
 
 const CardSection = styled.div`
-  padding: 0 40px 40px; // Espace autour des cards
+  padding: 0 40px 40px;
 `;
 
 export default function DashboardPage() {
@@ -53,7 +54,7 @@ export default function DashboardPage() {
         </MainContainer>
 
         <CardSection>
-          <StatsGrid>
+          <StatsGrid columns={3}>
             <StatCard
               icon={<FaWpforms color="#fff" />}
               number="125"

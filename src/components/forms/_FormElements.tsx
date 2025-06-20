@@ -1,24 +1,34 @@
 import styled from 'styled-components';
 
+// ✅ Label - Texte gris léger, espacement top
 export const Label = styled.label`
-  font-size: 18px;
-  opacity: 0.5;
+  font-size: 17.07px; /* selon Figma */
+  line-height: 25.6px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.87);
   margin-top: 20px;
   display: block;
-  color: rgba(0, 0, 0, 0.87);
 `;
 
+// ✅ Input - Ligne bas uniquement avec couleur Figma
 export const Input = styled.input`
-  width: 100%;
+  width: 320px;
+  height: 45px;
   border: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-  padding: 10px 0;
-  margin-bottom: 20px;
+  border-bottom: 1.33px solid rgba(160, 160, 160, 0.2); /* #A0A0A033 */
   background: transparent;
   color: rgba(0, 0, 0, 0.87);
-  outline: none;
+  font-size: 16px;
+  padding: 0 8px;
+  margin-bottom: 20px;
+
+  &:focus {
+    outline: none;
+    border-bottom: 1.33px solid #FFD964; /* optionnel : couleur focus */
+  }
 `;
 
+// ✅ Checkbox - Carré custom selon design
 export const Checkbox = styled.input.attrs({ type: 'checkbox' })`
   appearance: none;
   -webkit-appearance: none;
@@ -44,6 +54,7 @@ export const Checkbox = styled.input.attrs({ type: 'checkbox' })`
   }
 `;
 
+// ✅ Bouton de connexion
 export const SignInButton = styled.button`
   background: #45484B;
   color: #fff;
@@ -55,4 +66,8 @@ export const SignInButton = styled.button`
   border-radius: 5px;
   margin-top: 30px;
   cursor: pointer;
+
+  &:hover {
+    background: #333;
+  }
 `;

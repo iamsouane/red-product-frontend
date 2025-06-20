@@ -1,12 +1,12 @@
 'use client';
 
 import styled from 'styled-components';
-import LoginForm from '../../components/forms/LoginForm';
-import BrandHeader from '../../components/forms/BrandHeader';
+import LoginForm from '@/components/forms/LoginForm';
+import BrandHeader from '@/components/views/BrandHeader';
 
 const LoginContainer = styled.div`
   min-height: 100vh;
-  background: #121212;
+  background: #494C4F;
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -2,11 +2,11 @@
 
 import styled from 'styled-components';
 import RegisterForm from '@/components/forms/RegisterForm';
-import BrandHeader from '@/components/forms/BrandHeader';
+import BrandHeader from '@/components/views/BrandHeader';
 
 const RegisterContainer = styled.div`
   min-height: 100vh;
-  background: #121212;
+  background: #494C4F;
   display: flex;
   flex-direction: column;
   justify-content: center;

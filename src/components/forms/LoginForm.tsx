@@ -15,8 +15,10 @@ const FormBox = styled.div`
 `;
 
 const Title = styled.h2`
-  font-family: Roboto, sans-serif;
-  font-size: 17px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 17.07px;
+  line-height: 25.6px;
   color: rgba(0, 0, 0, 0.87);
   margin-bottom: 30px;
 `;
@@ -60,13 +62,13 @@ export default function LoginForm() {
 
   return (
     <FormBox>
-      <Title>Connectez-vous en tant qu’Admin</Title>
+      <Title>Connectez-vous en tant que Admin</Title>
       <form onSubmit={handleFakeLogin}>
         <Label htmlFor="email">E-mail</Label>
-        <Input id="email" type="email" />
+        <Input id="email" type="email" /* required supprimé */ />
 
         <Label htmlFor="password">Mot de passe</Label>
-        <Input id="password" type="password" />
+        <Input id="password" type="password" /* required supprimé */ />
 
         <CheckboxContainer>
           <Checkbox type="checkbox" id="remember" />
