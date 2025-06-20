@@ -41,6 +41,7 @@ export default function HotelsPage() {
   const fetchHotels = async () => {
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/hotels`);
+      if (!res.ok) throw new Error(`Erreur HTTP ${res.status}`);
       const data = await res.json();
       setHotels(data);
     } catch (error) {
@@ -49,6 +50,7 @@ export default function HotelsPage() {
       setLoading(false);
     }
   };
+
 
   useEffect(() => {
     fetchHotels();
@@ -71,7 +73,7 @@ export default function HotelsPage() {
             hotels.map((hotel) => (
               <HotelCard
                 key={hotel._id}
-                imageSrc={`http://localhost:5000${hotel.imageUrl}`}
+                imageSrc={`${process.env.NEXT_PUBLIC_API_URL}${hotel.imageUrl}`}
                 address={hotel.address}
                 name={hotel.name}
                 price={hotel.price}
