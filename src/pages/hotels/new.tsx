@@ -134,7 +134,7 @@ export default function NewHotelPage() {
     }
 
     try {
-      const res = await fetch('http://localhost:5000/api/hotels', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/hotels`, {
         method: 'POST',
         body: formData,
       });
