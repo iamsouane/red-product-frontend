@@ -65,27 +65,27 @@ export default function LoginForm() {
       <Title>Connectez-vous en tant que Admin</Title>
       <form onSubmit={handleFakeLogin}>
         <Label htmlFor="email">E-mail</Label>
-        <Input id="email" type="email" /* required supprimé */ />
+        <Input id="email" type="email" />
 
         <Label htmlFor="password">Mot de passe</Label>
-        <Input id="password" type="password" /* required supprimé */ />
+        <Input id="password" type="password" />
 
         <CheckboxContainer>
           <Checkbox type="checkbox" id="remember" />
-          <label htmlFor="remember">Gardez-moi connecte</label>
+          <label htmlFor="remember">Gardez-moi connect&eacute;</label>
         </CheckboxContainer>
 
         <SignInButton type="submit">Se connecter</SignInButton>
       </form>
 
       <Link href="/auth/forgot" passHref legacyBehavior>
-        <ForgotPassword>Mot de passe oublie ?</ForgotPassword>
+        <ForgotPassword>Mot de passe oubli&eacute; ?</ForgotPassword>
       </Link>
 
       <BottomText>
-        Vous n avez pas de compte ?
+        Vous n&apos;avez pas de compte ?
         <Link href="/auth/register" passHref legacyBehavior>
-          <LinkStyled>S inscrire</LinkStyled>
+          <LinkStyled>S&apos;inscrire</LinkStyled>
         </Link>
       </BottomText>
     </FormBox>
