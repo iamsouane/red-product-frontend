@@ -72,20 +72,20 @@ export default function LoginForm() {
 
         <CheckboxContainer>
           <Checkbox type="checkbox" id="remember" />
-          <label htmlFor="remember">Gardez-moi connecté</label>
+          <label htmlFor="remember">Gardez-moi connecte</label>
         </CheckboxContainer>
 
         <SignInButton type="submit">Se connecter</SignInButton>
       </form>
 
       <Link href="/auth/forgot" passHref legacyBehavior>
-        <ForgotPassword>Mot de passe oublié ?</ForgotPassword>
+        <ForgotPassword>Mot de passe oublie ?</ForgotPassword>
       </Link>
 
       <BottomText>
-        Vous n’avez pas de compte ?
+        Vous n avez pas de compte ?
         <Link href="/auth/register" passHref legacyBehavior>
-          <LinkStyled>S'inscrire</LinkStyled>
+          <LinkStyled>S inscrire</LinkStyled>
         </Link>
       </BottomText>
     </FormBox>

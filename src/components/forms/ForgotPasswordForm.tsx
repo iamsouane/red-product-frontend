@@ -56,7 +56,7 @@ export default function ForgotPasswordForm() {
 
   return (
     <FormBox>
-      <Title>Mot de passe oublié ?</Title>
+      <Title>Mot de passe oublie ?</Title>
       <Paragraph>
         Entrez votre adresse e-mail ci-dessous et nous vous enverrons des instructions sur la façon de modifier votre mot de passe.
       </Paragraph>

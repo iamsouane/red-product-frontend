@@ -71,7 +71,7 @@ export default function RegisterForm() {
         <CheckboxContainer>
           <Checkbox id="terms" name="terms" required />
           <TermsLabel htmlFor="terms">
-            J’accepte les
+            J accepte les
             <Link href="/terms" passHref legacyBehavior>
               <StyledLink> termes </StyledLink>
             </Link>
@@ -82,11 +82,11 @@ export default function RegisterForm() {
           </TermsLabel>
         </CheckboxContainer>
 
-        <SignInButton type="submit">S'inscrire</SignInButton>
+        <SignInButton type="submit">S inscrire</SignInButton>
       </form>
 
       <BottomText>
-        Vous avez déjà un compte ?
+        Vous avez deja un compte ?
         <Link href="/auth/login" passHref legacyBehavior>
           <LinkStyled>Se connecter</LinkStyled>
         </Link>
