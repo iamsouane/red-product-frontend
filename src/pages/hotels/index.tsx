@@ -73,7 +73,7 @@ export default function HotelsPage() {
             hotels.map((hotel) => (
               <HotelCard
                 key={hotel._id}
-                imageSrc={`${process.env.NEXT_PUBLIC_API_URL}${hotel.imageUrl}`}
+                imageSrc={hotel.imageUrl}
                 address={hotel.address}
                 name={hotel.name}
                 price={hotel.price}

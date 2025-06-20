@@ -59,7 +59,7 @@ interface HotelCardProps {
   imageSrc: string;
   address: string;
   name: string;
-  price: string; // sans "par nuit", ajouté en dur dans le composant
+  price: string;
 }
 
 export default function HotelCard({ imageSrc, address, name, price }: HotelCardProps) {
